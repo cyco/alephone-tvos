@@ -1,0 +1,72 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1A4A0B99CC552C39787ABB09A86BBC3C8A538AF3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7638DD44A1B93E4FBAFE5559635B0B36B4916684" : 0,
+    "0BACC2040D445E621D7BA66ADE6EF3C66E112A79" : 0,
+    "B07DF48B870C69EBACDEA20BDCF17AF2B2C79D36" : 0,
+    "7F526783529F263CFCC964EC9C0A3857A3D8C64E" : 0,
+    "39A6AD5E72B6024FCEE576366986020D0B18F200" : 0,
+    "1A4A0B99CC552C39787ABB09A86BBC3C8A538AF3" : 0,
+    "EEBBDEA5EC0F003703744EF07407378CE1C715C9" : 0,
+    "FA0D03541D75E05B348C14054FD897B577F8EE2A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "7AA6222E-6086-4623-92AC-56CD9DA89865",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7638DD44A1B93E4FBAFE5559635B0B36B4916684" : "AlephOne-tvOS\/AlephOne\/",
+    "0BACC2040D445E621D7BA66ADE6EF3C66E112A79" : "alephone-tvos\/Game%20Data\/marathon-2\/",
+    "B07DF48B870C69EBACDEA20BDCF17AF2B2C79D36" : "alephone-tvos\/Game%20Data\/marathon-infinity\/",
+    "7F526783529F263CFCC964EC9C0A3857A3D8C64E" : "marathon-ios\/",
+    "39A6AD5E72B6024FCEE576366986020D0B18F200" : "alephone-tvos\/Game%20Data\/m1a1\/",
+    "1A4A0B99CC552C39787ABB09A86BBC3C8A538AF3" : "alephone-tvos\/",
+    "EEBBDEA5EC0F003703744EF07407378CE1C715C9" : "AlephOne-tvOS\/Externals\/Apple-Boost-BuildScript\/",
+    "FA0D03541D75E05B348C14054FD897B577F8EE2A" : "AlephOne-tvOS\/Externals\/freetype2-ios\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "AlephOne-tvOS",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "AlephOne-tvOS.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Aleph-One-Marathon\/data-marathon-2.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0BACC2040D445E621D7BA66ADE6EF3C66E112A79"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:cyco\/alephone-tvos.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1A4A0B99CC552C39787ABB09A86BBC3C8A538AF3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Aleph-One-Marathon\/data-m1a1.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "39A6AD5E72B6024FCEE576366986020D0B18F200"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Aleph-One-Marathon\/alephone.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7638DD44A1B93E4FBAFE5559635B0B36B4916684"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/blezek\/marathon-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7F526783529F263CFCC964EC9C0A3857A3D8C64E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Aleph-One-Marathon\/data-marathon-infinity.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B07DF48B870C69EBACDEA20BDCF17AF2B2C79D36"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/faithfracture\/Apple-Boost-BuildScript.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EEBBDEA5EC0F003703744EF07407378CE1C715C9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cdave1\/freetype2-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FA0D03541D75E05B348C14054FD897B577F8EE2A"
+    }
+  ]
+}
