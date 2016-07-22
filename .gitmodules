@@ -1,0 +1,15 @@
+[submodule "AlephOne"]
+	path = AlephOne
+	url = git@github.com:cyco/alephone.git
+[submodule "Frameworks"]
+	path = Frameworks
+	url = git@github.com:cyco/AlephOne-tvOS-Frameworks.git
+[submodule "Game Data/m1a1"]
+	path = Game Data/m1a1
+	url = https://github.com/Aleph-One-Marathon/data-m1a1.git
+[submodule "Game Data/marathon-infinity"]
+	path = Game Data/marathon-infinity
+	url = https://github.com/Aleph-One-Marathon/data-marathon-infinity.git
+[submodule "Game Data/marathon-2"]
+	path = Game Data/marathon-2
+	url = https://github.com/Aleph-One-Marathon/data-marathon-2.git
