@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:AlephOne/aleph.xcodeproj">
+      location = "group:AlephOne-tvOS.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:AlephOne-tvOS/AlephOne-tvOS.xcodeproj">
+      location = "group:AlephOne/aleph.xcodeproj">
    </FileRef>
 </Workspace>

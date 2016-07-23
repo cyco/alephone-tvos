@@ -1,0 +1,36 @@
+//
+//  AlephOne.pch
+//  AlephOne-tvOS
+//
+//  Created by Christoph Leimbrock on 12/07/16.
+//  Copyright © 2016 chris. All rights reserved.
+//
+
+#ifndef AlephOne_pch
+#define AlephOne_pch
+
+#import <Availability.h>
+#import <TargetConditionals.h>
+
+// Aleph One Options
+#undef USE_GAMECENTER
+#define __IPAD__
+#ifndef __IPHONEOS__
+#define __IPHONEOS__ __IPHONEOS__
+#endif
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#endif
+
+#define MLog(fmt, ...) NSLog(@"%s L%d %@", __PRETTY_FUNCTION__, __LINE__, [NSString stringWithFormat:fmt, ##__VA_ARGS__]);
+
+#ifdef HAVE_OPENGL
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
+#endif
+
+#endif /* AlephOne_pch */

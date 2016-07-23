@@ -9,6 +9,7 @@
     "B07DF48B870C69EBACDEA20BDCF17AF2B2C79D36" : 0,
     "7F526783529F263CFCC964EC9C0A3857A3D8C64E" : 0,
     "39A6AD5E72B6024FCEE576366986020D0B18F200" : 0,
+    "A62BD15653E6864AF586E451E56B2197E975A01C" : 0,
     "1A4A0B99CC552C39787ABB09A86BBC3C8A538AF3" : 0,
     "EEBBDEA5EC0F003703744EF07407378CE1C715C9" : 0,
     "FA0D03541D75E05B348C14054FD897B577F8EE2A" : 0
@@ -20,6 +21,7 @@
     "B07DF48B870C69EBACDEA20BDCF17AF2B2C79D36" : "alephone-tvos\/Game%20Data\/marathon-infinity\/",
     "7F526783529F263CFCC964EC9C0A3857A3D8C64E" : "marathon-ios\/",
     "39A6AD5E72B6024FCEE576366986020D0B18F200" : "alephone-tvos\/Game%20Data\/m1a1\/",
+    "A62BD15653E6864AF586E451E56B2197E975A01C" : "AlephOne-tvOS\/Frameworks\/",
     "1A4A0B99CC552C39787ABB09A86BBC3C8A538AF3" : "alephone-tvos\/",
     "EEBBDEA5EC0F003703744EF07407378CE1C715C9" : "AlephOne-tvOS\/Externals\/Apple-Boost-BuildScript\/",
     "FA0D03541D75E05B348C14054FD897B577F8EE2A" : "AlephOne-tvOS\/Externals\/freetype2-ios\/"
@@ -52,6 +54,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/blezek\/marathon-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7F526783529F263CFCC964EC9C0A3857A3D8C64E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:cyco\/AlephOne-tvOS-Frameworks.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A62BD15653E6864AF586E451E56B2197E975A01C"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Aleph-One-Marathon\/data-marathon-infinity.git",

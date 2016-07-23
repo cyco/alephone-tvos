@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainMenuViewController" customModule="Marathon_tvOS" customModuleProvider="target">
+            <connections>
+                <outlet property="aboutButton" destination="3Cr-45-Nug" id="IDn-rs-UZc"/>
+                <outlet property="loadGameButton" destination="m7j-r0-SOR" id="uEV-oM-IgT"/>
+                <outlet property="newGameButton" destination="kdP-2l-LYL" id="mgn-Wv-DxH"/>
+                <outlet property="preferredFocusedView" destination="kdP-2l-LYL" id="PeZ-Kg-mmu"/>
+                <outlet property="view" destination="8RP-0Q-6UH" id="mOg-78-8sP"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="8RP-0Q-6UH">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainMenuBackdrop" translatesAutoresizingMaskIntoConstraints="NO" id="ZGv-Rl-AA5">
+                    <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBh-y4-89F">
+                    <rect key="frame" x="1390" y="489" width="320" height="86"/>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="Settings"/>
+                    <connections>
+                        <action selector="settings:" destination="-1" eventType="primaryActionTriggered" id="gME-5L-8Pl"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdP-2l-LYL">
+                    <rect key="frame" x="1390" y="269" width="320" height="86"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="Ovu-FA-i6E"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="New Game"/>
+                    <connections>
+                        <action selector="newGame:" destination="-1" eventType="primaryActionTriggered" id="8SB-Ui-bye"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cr-45-Nug">
+                    <rect key="frame" x="1390" y="611" width="320" height="86"/>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="About"/>
+                    <connections>
+                        <action selector="about:" destination="-1" eventType="primaryActionTriggered" id="7Vd-6y-QWU"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7j-r0-SOR">
+                    <rect key="frame" x="1390" y="390" width="320" height="86"/>
+                    <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                    <state key="normal" title="Load"/>
+                    <connections>
+                        <action selector="load:" destination="-1" eventType="primaryActionTriggered" id="LUY-Gh-DJG"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="IBh-y4-89F" firstAttribute="width" secondItem="kdP-2l-LYL" secondAttribute="width" id="4yv-k9-UtW"/>
+                <constraint firstItem="IBh-y4-89F" firstAttribute="top" secondItem="m7j-r0-SOR" secondAttribute="bottom" constant="13" id="5lq-YJ-eFb"/>
+                <constraint firstItem="m7j-r0-SOR" firstAttribute="width" secondItem="kdP-2l-LYL" secondAttribute="width" id="7kW-3r-vK5"/>
+                <constraint firstAttribute="trailing" secondItem="kdP-2l-LYL" secondAttribute="trailing" constant="210" id="Htn-oe-aR9"/>
+                <constraint firstItem="m7j-r0-SOR" firstAttribute="centerX" secondItem="kdP-2l-LYL" secondAttribute="centerX" id="IwJ-BJ-xH7"/>
+                <constraint firstItem="IBh-y4-89F" firstAttribute="centerX" secondItem="kdP-2l-LYL" secondAttribute="centerX" id="Lwf-3X-C1s"/>
+                <constraint firstItem="ZGv-Rl-AA5" firstAttribute="leading" secondItem="8RP-0Q-6UH" secondAttribute="leading" id="VuW-iN-UdI"/>
+                <constraint firstItem="m7j-r0-SOR" firstAttribute="top" secondItem="kdP-2l-LYL" secondAttribute="bottom" constant="35" id="bsx-Vv-SaX"/>
+                <constraint firstItem="3Cr-45-Nug" firstAttribute="width" secondItem="kdP-2l-LYL" secondAttribute="width" id="byd-Jt-ash"/>
+                <constraint firstItem="3Cr-45-Nug" firstAttribute="top" secondItem="IBh-y4-89F" secondAttribute="bottom" constant="36" id="d87-Ys-BKV"/>
+                <constraint firstAttribute="bottom" secondItem="ZGv-Rl-AA5" secondAttribute="bottom" id="dHu-9y-8HJ"/>
+                <constraint firstItem="IBh-y4-89F" firstAttribute="top" secondItem="8RP-0Q-6UH" secondAttribute="top" constant="489" id="fa4-jH-Phs"/>
+                <constraint firstItem="3Cr-45-Nug" firstAttribute="centerX" secondItem="kdP-2l-LYL" secondAttribute="centerX" id="mgz-tZ-WJn"/>
+                <constraint firstAttribute="trailing" secondItem="ZGv-Rl-AA5" secondAttribute="trailing" id="pWN-co-KDM"/>
+                <constraint firstItem="ZGv-Rl-AA5" firstAttribute="top" secondItem="8RP-0Q-6UH" secondAttribute="top" id="tMD-Ha-kKc"/>
+            </constraints>
+            <point key="canvasLocation" x="336" y="89"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="mainMenuBackdrop" width="16" height="16"/>
+    </resources>
+</document>
