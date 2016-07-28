@@ -12,43 +12,22 @@
 #import <AlephOne/AlephOne.h>
 
 #import "AlephOne.h"
-#import "AlephOneShell.h"
-#import "AlephOneAppDelegate.h"
+#import "AppDelegate.h"
 #import "GameViewController.h"
 
 #import "InputManager.h"
 
 extern float DifficultyMultiplier[];
-
-// Useful functions
 extern bool save_game(void);
-extern "C" void setOpenGLView ( SDL_uikitopenglview* view );
-
-// For cheats
 extern void AddItemsToPlayer(short ItemType, short MaxNumber);
 extern void AddOneItemToPlayer(short ItemType, short MaxNumber);
+extern "C" void setOpenGLView ( SDL_uikitopenglview* view );
 
-/*
-extern "C" {
-	extern  int
-	SDL_SendMouseMotion(int relative, int x, int y);
-
-#import "SDL_keyboard_c.h"
-#import "SDL_keyboard.h"
-#import "SDL_stdinc.h"
-#import "SDL_mouse_c.h"
-#import "SDL_mouse.h"
-#import "SDL_events.h"
-}
- */
 #import <string.h>
 #import <stdlib.h>
 
-extern void PlayInterfaceButtonSound(short SoundID);
-extern struct view_data *world_view; /* should be static */
-BOOL StatsDownloaded = NO;
-extern  bool switch_can_be_toggled(short line_index, bool player_hit);
-enum // control panel sounds
+extern struct view_data *world_view;
+enum
 {
 	_activating_sound,
 	_deactivating_sound,
@@ -56,6 +35,7 @@ enum // control panel sounds
 
 	NUMBER_OF_CONTROL_PANEL_SOUNDS
 };
+
 struct control_panel_definition
 {
 	int16 _class;
@@ -69,67 +49,6 @@ struct control_panel_definition
 
 	int16 item;
 };
-
-bool local_switch_can_be_toggled(
-																 short side_index,
-																 bool player_hit)
-{
-
-	// bool temp = switch_can_be_toggled(side_index, player_hit );
-
-
-	bool valid_toggle= true;
-	struct side_data *side= get_side_data(side_index);
-
-
-	extern control_panel_definition *get_control_panel_definition(
-																																const short control_panel_type);
-	struct control_panel_definition *definition= get_control_panel_definition(
-																																						side->control_panel_type);
-	// LP change: idiot-proofing
-	if (!definition) {
-		return false;
-	}
-
-	if (side->flags&_side_is_lighted_switch) {
-		valid_toggle= get_light_intensity(side->primary_lightsource_index)>
-		(3*FIXED_ONE/4) ? true : false;
-	}
-
-	if ( ( definition->item!=NONE ) && !player_hit) {
-		valid_toggle= false;
-	}
-	if (player_hit &&
-			(side->flags&_side_switch_can_only_be_hit_by_projectiles)) {
-		valid_toggle= false;
-	}
-	/*
-	 if (valid_toggle && (side->flags&_side_switch_can_be_destroyed)) {
-	 // destroy switch
-	 SET_SIDE_CONTROL_PANEL(side, false);
-	 if ( SideList[732].flags != 34 ) {
-	 printf ( "Suddenly switched in %s %s:%d\n", __FUNCTION__, __FILE__, __LINE__ );
-	 }
-
-	 }
-
-	 if (!valid_toggle && player_hit) {
-	 play_control_panel_sound(side_index, _unusuable_sound);
-	 }
-	 */
-
-	return valid_toggle;
-}
-
-extern short find_action_key_target(
-																		short player_index,
-																		world_distance range,
-																		short *target_type);
-short localFindActionTarget(
-														short player_index,
-														world_distance range,
-														short *target_type)
-{ return NONE; }
 
 #define kPauseAlphaDefault 0.5;
 @interface GameViewController () {
@@ -266,8 +185,6 @@ short localFindActionTarget(
 	// Do we show the overview?
 	if ( dynamic_world->current_level_number == 0 ) {
 	}
-	// [Tracking trackPageview:[NSString stringWithFormat:@"/new/%@/%d", [Statistics difficultyToString:player_preferences->difficulty_level], dynamic_world->current_level_number]];
-	// [Tracking tagEvent:@"startup" attributes:[NSDictionary dictionaryWithObjectsAndKeys:[Statistics difficultyToString:player_preferences->difficulty_level], @"difficulty", [NSString stringWithFormat:@"%d", dynamic_world->current_level_number], @"level", nil]];
 
 	[self cancelNewGame];
 	// [self performSelector:@selector(cancelNewGame) withObject:nil afterDelay:0.0];
@@ -311,11 +228,17 @@ short localFindActionTarget(
 
 - (void)setOpenGLView:(SDL_uikitopenglview*)oglView {
 	[self stopAnimation];
+	
+	if(_viewGL) {
+		[_viewGL removeFromSuperview];
+		_viewGL = nil;
+	}
+	
+	[oglView removeFromSuperview];
+	oglView.frame = self.view.frame;
+	[self.view addSubview:oglView];
 	_viewGL = oglView;
-	[_viewGL.window makeKeyAndVisible];
-//	_viewGL.userInteractionEnabled = NO;
-//	_viewGL.frame = self.view.bounds;
-	//	_viewGL.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+
 	[self startAnimation];
 }
 
@@ -334,57 +257,6 @@ short localFindActionTarget(
 	mode = MenuMode;
 	[self closeEvent];
 	set_game_state(_close_game);
-}
-
-#pragma mark - Choose saved game methods
-extern void force_system_colors(void);
-extern bool choose_saved_game_to_load(FileSpecifier& File);
-extern bool load_and_start_game(FileSpecifier& File);
-
-- (IBAction)chooseSaveGame {
-
-	if ( true ) {
-		// Pop something up
-#if ! TARGET_OS_TV
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No saved games"
-																										message:@"There are no saved games, please start a new game"
-																									 delegate:nil
-																					cancelButtonTitle:@"OK"
-																					otherButtonTitles:nil];
-		[alert show];
-		[alert release];
-#endif
-		return;
-	}
-}
-
-- (IBAction) gameChosen:(SavedGame*)game {
-	[self performSelector:@selector(chooseSaveGameCanceled) withObject:nil afterDelay:0.0];
-
-	MLog ( @"Current world ticks %d", dynamic_world->tick_count );
-	self.currentSavedGame = game;
-	int sessions = game.numberOfSessions.intValue + 1;
-	game.numberOfSessions = @(sessions);
-
-	// load the HD textures if needed
-
-	MLog (@"Loading game: %@", game.filename );
-	// load_and_start_game(FileToLoad);
-	// [Tracking trackPageview:[NSString stringWithFormat:@"/load/%@/%d", [Statistics difficultyToString:player_preferences->difficulty_level], dynamic_world->current_level_number]];
-
-	/* [Tracking tagEvent:@"load" attributes:[NSDictionary dictionaryWithObjectsAndKeys:
-	 [Statistics difficultyToString:player_preferences->difficulty_level],
-	 @"difficulty",
-	 [NSString stringWithFormat:@"%d", dynamic_world->current_level_number],
-	 @"level",
-	 nil]]; */
-	MLog ( @"Restored game in position %d, %d", local_player->location.x, local_player->location.y );
-
-}
-
-- (IBAction) chooseSaveGameCanceled {
-	[self closeEvent];
-	// [self.loadGameView performSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.5];
 }
 
 extern SDL_Surface *draw_surface;
@@ -422,9 +294,7 @@ extern bool handle_open_replay(FileSpecifier& File);
 	return;
 }
 
-#pragma mark -
-#pragma mark Game controls
-
+#pragma mark - Game controls
 // If we are playing, pause...
 - (IBAction)pauseForBackground:(id)from {
 	if ( mode == GameMode && !isPaused ) {
@@ -522,7 +392,7 @@ short items[]=
 	}
 }
 
-- (void)runMainLoopOnce:(id)sender {
+- (void)runMainLoopOnce:(id)sender {	
 	if ( !inMainLoop ) {
 		inMainLoop = YES;
 		AlephOneMainLoop();
@@ -540,5 +410,68 @@ short items[]=
 	[InputManager sharedInputManager];
 	
 	[self beginGame];
+	
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self cheatWeapons:nil];
+		[self cheatAmmo:nil];
+	});
 }
+
+- (IBAction)cheatAmmo:(id)sender {
+	short items[]=
+	{ 
+		// Only get the SMG/Flechette gun in Infinity
+#if SCENARIO == 3
+		_i_smg_ammo,
+#endif
+		_i_assault_rifle_magazine, _i_assault_grenade_magazine,
+		_i_magnum_magazine, _i_missile_launcher_magazine,
+		_i_flamethrower_canister,
+		_i_plasma_magazine, _i_shotgun_magazine, _i_shotgun
+	};
+	
+	for(unsigned index= 0; index<sizeof(items)/sizeof(short); ++index)
+	{
+		switch(get_item_kind(items[index]))
+		{
+			case _ammunition:
+				AddItemsToPlayer(items[index],10);
+				break;        
+			default:
+				break;
+		}
+		process_new_item_for_reloading(local_player_index, items[index]);
+	}
+}
+
+- (IBAction)cheatWeapons:(id)sender {
+	short items[]=
+	{
+		// Only get the SMG/Flechette gun in Infinity
+#if SCENARIO == 3
+		_i_smg,
+#endif
+		_i_assault_rifle, _i_magnum, _i_missile_launcher, _i_flamethrower,
+		_i_plasma_pistol, _i_alien_shotgun, _i_shotgun
+		
+	};
+	
+	for(unsigned index= 0; index<sizeof(items)/sizeof(short); ++index)
+	{
+		switch(get_item_kind(items[index]))
+		{
+			case _weapon:
+				if(items[index]==_i_shotgun || items[index]==_i_magnum) {
+					AddOneItemToPlayer(items[index],2);
+				} else {
+					AddItemsToPlayer(items[index],1);
+				}
+				break;
+			default:
+				break;
+		}
+		process_new_item_for_reloading(local_player_index, items[index]);
+	}
+}
+
 @end

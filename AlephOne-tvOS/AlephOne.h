@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+extern void AlephOneMainLoop ();
+extern void AlephOneInitialize ();
+
 @interface AlephOne : NSObject
+
 + (void)display_main_menu;
 + (void)begin_new_game;
 @end

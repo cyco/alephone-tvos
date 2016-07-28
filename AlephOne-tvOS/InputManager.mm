@@ -7,48 +7,37 @@
 //
 
 #import "InputManager.h"
-#define BOOL_STR(arg) (arg ? "YES" : "NO")
-#if defined(__cplusplus)
-/*
-extern "C" {
-#endif
-	extern  int
-	SDL_SendMouseMotion(int relative, int x, int y);
-
-#import "SDL_keyboard_c.h"
-#import "SDL_keyboard.h"
-#import "SDL_stdinc.h"
-#import "SDL_mouse_c.h"
-#import "SDL_mouse.h"
-#import "SDL_events.h"
-#if defined(__cplusplus)
-}
- */
-#endif
 #import <AlephOne/AlephOne.h>
 #import <SDL.h>
+
+extern "C" {
+	#import "SDL_mouse_c.h"
+}
 #import "Callbacks.h"
+#define BOOL_STR(arg) (arg ? "YES" : "NO")
 
 @interface InputManager () {
-	SDL_Keycode primaryFireKey;
-	SDL_Keycode secondaryFireKey;
-	SDL_Keycode nextWeaponKey;
-	SDL_Keycode previousWeaponKey;
-	SDL_Keycode inventoryKey;
-	SDL_Keycode actionKey;
-	SDL_Keycode forwardKey;
-	SDL_Keycode backwardKey;
-	SDL_Keycode leftKey;
-	SDL_Keycode rightKey;
-	SDL_Keycode runKey;
-	SDL_Keycode mapKey;
+	struct {
+		SDL_Keycode rightTrigger;
+		SDL_Keycode leftTrigger;
+		SDL_Keycode nextWeapon;
+		SDL_Keycode previousWeapon;
+		SDL_Keycode inventoryKey;
+		SDL_Keycode forward;
+		SDL_Keycode backward;
+		SDL_Keycode left;
+		SDL_Keycode right;
+		SDL_Keycode action;
+		SDL_Keycode map;
+		SDL_Keycode run;
+		
+		SDL_Keycode lookUpKey;
+		SDL_Keycode lookDownKey;
+		SDL_Keycode lookLeftKey;
+		SDL_Keycode lookRightKey;
+	} keys;
 
-	SDL_Keycode lookUpKey;
-	SDL_Keycode lookDownKey;
-	SDL_Keycode lookLeftKey;
-	SDL_Keycode lookRightKey;
-
-	int deltaX, deltaY;
+	float deltaX, deltaY;
 }
 @property (readwrite) GCExtendedGamepad *currentController;
 @end
@@ -66,64 +55,48 @@ extern "C" {
 
 - (instancetype)init {
 	if((self = [super init])) {
-		[self setupFieldDefinitions];
-
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(controllerDidConnect:) name:GCControllerDidConnectNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(controllerDidDisconnect:) name:GCControllerDidDisconnectNotification object:nil];
 
 		[[GCController controllers] enumerateObjectsUsingBlock:^(GCController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 			[self noticeController:obj];
 		}];
+		
+		[self _determineKeyMapping];
+		
+		deltaX = 0;
+		deltaY = 0;
 	}
 	return self;
 }
 
-
-- (void)setupFieldDefinitions {
-	/*
-	key_definition *key = current_key_definitions;
-	for (unsigned i=0; i<NUMBER_OF_STANDARD_KEY_DEFINITIONS; i++, key++) {
-		if ( key->action_flag == _left_trigger_state ){
-			primaryFireKey = key->offset;
-		} else if ( key->action_flag == _right_trigger_state ){
-			secondaryFireKey = key->offset;
-		} else if ( key->action_flag == _toggle_map ){
-			mapKey = key->offset;
-		} else if ( key->action_flag == _action_trigger_state ) {
-			actionKey = key->offset;
-		} else if ( key->action_flag == _cycle_weapons_forward ) {
-			nextWeaponKey = key->offset;
-		} else if ( key->action_flag == _cycle_weapons_backward ) {
-			previousWeaponKey = key->offset;
-		} else if ( key->action_flag == _moving_forward ) {
-			forwardKey = key->offset;
-		} else if ( key->action_flag == _moving_backward ) {
-			backwardKey = key->offset;
-		} else if ( key->action_flag == _sidestepping_left ){
-			leftKey = key->offset;
-		} else if ( key->action_flag == _sidestepping_right ) {
-			rightKey = key->offset;
-		} else if ( key->action_flag == _run_dont_walk ) {
-			runKey = key->offset;
-		} else if ( key->action_flag == _looking_up ) {
-			lookUpKey = key->offset;
-		} else if ( key->action_flag == _looking_down ) {
-			lookDownKey = key->offset;
-		} else if ( key->action_flag == _looking_left ) {
-			lookLeftKey = key->offset;
-		} else if ( key->action_flag == _looking_right ) {
-			lookRightKey = key->offset;
-		}
+- (void)_determineKeyMapping {
+	for(size_t i=0; i < NUMBER_OF_STANDARD_KEY_DEFINITIONS; i++) {
+		key_definition &definition = standard_key_definitions[i];
+#define MapKey(_KEY_) keys._KEY_ = definition.offset; break
+		switch(definition.action_flag) {
+			case _moving_forward: MapKey(forward);
+			case _moving_backward: MapKey(backward);
+			case _sidestepping_left: MapKey(left);
+			case _sidestepping_right: MapKey(right);
+				
+			case _cycle_weapons_forward: MapKey(nextWeapon);
+			case _cycle_weapons_backward: MapKey(previousWeapon);
+			case _right_trigger_state: MapKey(rightTrigger);
+			case _left_trigger_state: MapKey(leftTrigger);
+			case _run_dont_walk: MapKey(run);
+			case _action_trigger_state: MapKey(action);
+			case _toggle_map: MapKey(map);
+			default:break;
+#undef MapKey
+		}	
 	}
-	 */
 }
 
 - (void)_registerNotifications {
-
 }
 
 - (void)_unregisterNotifications {
-
 }
 
 - (void)startWatching {
@@ -138,56 +111,51 @@ extern "C" {
 	[GCController stopWirelessControllerDiscovery];
 }
 
-#define mapButton(__key__, __key_identifier__) do{} while(0);
-// self.currentController.__key__.valueChangedHandler = ^(GCControllerButtonInput *button, float val, bool pressed) { \
-NSLog(@"button: %s (-> %d), down: %s", #__key__, __key_identifier__, BOOL_STR(pressed)); \
-Uint8 *key_map = SDL_GetKeyboardState(NULL); \
-key_map[__key_identifier__] = pressed ? 1 : 0; \
-}
+static float xFactor = 0.5;
+static float yFactor = 0.5;
 - (void)noticeController:(GCController*)controller {
 	if(controller.extendedGamepad && !self.currentController) {
 		MLog(@"Found new gamepad");
 		self.currentController = controller.extendedGamepad;
 		self.currentController.controller.playerIndex = GCControllerPlayerIndex1;
-
-		mapButton(leftShoulder, previousWeaponKey);
-		mapButton(rightShoulder, nextWeaponKey);
-		mapButton(rightTrigger, primaryFireKey);
-		mapButton(leftTrigger, secondaryFireKey);
-		mapButton(dpad.up, forwardKey);
-		mapButton(dpad.down, backwardKey);
-		mapButton(dpad.left, leftKey);
-		mapButton(dpad.right, rightKey);
-
-		mapButton(buttonA, actionKey);
-		mapButton(buttonB, mapKey);
+		
+#define mapButton(__key__, __key_identifier__) self.currentController.__key__.valueChangedHandler = ^(GCControllerButtonInput *button, float val, bool pressed) { \
+		NSLog(@"button %s %s", #__key__, pressed ? "pressed" : "released");				\
+		Uint8 *state = SDL_GetMutableKeyboardState(NULL);								\
+		state[__key_identifier__] = pressed;											\
+	};
+		
+		mapButton(leftTrigger, keys.rightTrigger);
+		mapButton(rightTrigger, keys.leftTrigger);
+		mapButton(leftShoulder, keys.previousWeapon);
+		mapButton(rightShoulder, keys.nextWeapon);
+		mapButton(dpad.up, keys.forward);
+		mapButton(dpad.down, keys.backward);
+		mapButton(dpad.left, keys.left);
+		mapButton(dpad.right, keys.right);
+		
+		mapButton(buttonA, keys.action);
+		mapButton(buttonX, keys.map);
+		mapButton(buttonB, keys.map);
+		mapButton(buttonY, keys.action);
 
 		self.currentController.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *axis, float x, float y) {
-			/*
-			Uint8 *key_map = SDL_GetKeyboardState(NULL);
-			key_map[runKey] = (sqrt(pow(x, 2) + pow(y, 2)) > 0.5) ? 1 : 0;
-			key_map[leftKey] = (x < -0.01) ? 1 : 0;
-			key_map[rightKey] = (x > 0.01) ? 1 : 0;
-			key_map[backwardKey] = (y < -0.01) ? 1 : 0;
-			key_map[forwardKey]  = (y > 0.01) ? 1 : 0;
-			 */
+			Uint8 *key_map = SDL_GetMutableKeyboardState(NULL);
+			// key_map[keys.run] = (sqrt(pow(x, 2) + pow(y, 2)) > 0.5) ? 1 : 0;
+			key_map[keys.left] = (x < -0.01) ? 1 : 0;
+			key_map[keys.right] = (x > 0.01) ? 1 : 0;
+			key_map[keys.backward] = (y < -0.01) ? 1 : 0;
+			key_map[keys.forward]  = (y > 0.01) ? 1 : 0;
 		};
 
 		self.currentController.rightThumbstick.valueChangedHandler = ^(GCControllerDirectionPad *axis, float x, float y) {
-			/*
-			Uint8 *key_map = SDL_GetKeyboardState(NULL);
-
-			deltaX = x * xFactor;
-			deltaY = y * yFactor;
-			 */
-			// SDL_SendMouseMotion(true, x, y);
+			deltaX = x*xFactor;
+			deltaY = y*yFactor;
 		};
 	}
 }
-static float xFactor = 8.0;
-static float yFactor = 8.0;
 #undef mapButton
-- (void)mouseDeltaX:(int*)dx deltaY:(int*)dy {
+- (void)mouseDeltaX:(float*)dx deltaY:(float*)dy {
 	*dx = deltaX;
 	*dy = deltaY;
 }

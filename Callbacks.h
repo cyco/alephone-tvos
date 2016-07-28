@@ -16,6 +16,7 @@ extern "C" {
 	void helperBringUpHUD();
 
     void setOpenGLView(void* view);
+	void setSDLWindowData(void* data);
     
 	int helperNewGame();
 	void helperSaveGame();
@@ -35,7 +36,7 @@ extern "C" {
 	void helperPlayerKilled();
 	int helperAlwaysPlayIntro();
 	int helperAutocenter();
-	void helperGetMouseDelta ( int *dx, int *dy );
+	void helperGetMouseDelta(float *dx, float *dy);
 	void helperSwitchWeapons(int weapon);
 	void helperQuit();
 	void helperNetwork();

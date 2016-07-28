@@ -11,7 +11,6 @@
 #import "SDL_uikitopenglview.h"
 #import "SDL_keyboard.h"
 
-#import "ScenarioDescription.h"
 #import "SavedGame.h"
 
 typedef NS_ENUM(unsigned int, HUDMode) {

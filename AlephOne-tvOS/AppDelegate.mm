@@ -1,12 +1,12 @@
 //
-//  AlephOneAppDelegate.m
+//  AppDelegate
 //  AlephOne
 //
 //  Created by Daniel Blezek on 8/22/10.
 //  Copyright __MyCompanyName__ 2010. All rights reserved.
 //
 
-#import "AlephOneAppDelegate.h"
+#import "AppDelegate.h"
 
 #import "AlephOne-Swift.h"
 #import <AVFoundation/AVAudioSession.h>
@@ -14,23 +14,19 @@
 
 #import "GameViewController.h"
 
-extern "C" {
-	// #import "SDL_sysvideo.h"
-	// #import "SDL_events_c.h"
-}
 #import "SDL_uikitopenglview.h"
-#import "AlephOneShell.h"
 #import "AlephOne.h"
 
 NSString * const kHasLaunchedBefore = @"launchedBefore";
+
 int SDL_main(int argc, char **argv){
 	return 0;
 }
 
-@implementation AlephOneAppDelegate
+@implementation AppDelegate
 
 + (void)initialize {
-	if(self != [AlephOneAppDelegate class]) {
+	if(self != [AppDelegate class]) {
 		return;
 	}
 	
@@ -59,16 +55,11 @@ int SDL_main(int argc, char **argv){
 }
 #pragma mark -
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	// [super application:application didFinishLaunchingWithOptions:launchOptions];
-	
 	finishedStartup = NO;
 	
 	NSString *currentDirectory = [NSFileManager defaultManager].currentDirectoryPath;
-	NSLog (@"Current Directory: %@", currentDirectory);
-	/* Set working directory to resource path */
 	[[NSFileManager defaultManager] changeCurrentDirectoryPath: [NSBundle mainBundle].resourcePath];
 	currentDirectory = [NSFileManager defaultManager].currentDirectoryPath;
-	NSLog(@"Current Directory: %@", currentDirectory);
 	
 	[self _setupScenario];
 	
@@ -78,18 +69,15 @@ int SDL_main(int argc, char **argv){
 		MLog(@"Error setting audio category");
 	}
 	
-	// [self.window makeKeyAndVisible];
 	[self _showInitialViewController];
+	[self.window makeKeyAndVisible];
 	
 	SDL_SetMainReady();
 	
-	[self performSelector:@selector(startAlephOne) withObject:nil afterDelay:0.0];
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[[GameViewController sharedInstance] startAnimation];
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-			[[GameViewController sharedInstance] startNewGame:nil];
-		});
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self startAlephOne];
 	});
+	
 	return YES;
 }
 
@@ -107,14 +95,14 @@ int SDL_main(int argc, char **argv){
 - (void)_showInitialViewController {
 	UIViewController *initialViewController = nil;
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:kHasLaunchedBefore]) {
-		// initialViewController = [[IntroViewController alloc] initWithNibName:nil bundle:nil];
+		initialViewController = [[IntroViewController alloc] initWithNibName:nil bundle:nil];
 	} else {
-		// initialViewController = [[MainMenuViewController alloc] initWithNibName:nil bundle:nil];
+		initialViewController = [[MainMenuViewController alloc] initWithNibName:nil bundle:nil];
 	}
 	
-	// UIViewController *rootViewController = self.window.rootViewController;
-	// [rootViewController addChildViewController:initialViewController];
-	// [rootViewController.view addSubview:initialViewController.view];
+	UIViewController *rootViewController = self.window.rootViewController;
+	[rootViewController addChildViewController:initialViewController];
+	[rootViewController.view addSubview:initialViewController.view];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -155,13 +143,10 @@ int SDL_main(int argc, char **argv){
 }
 
 const char* argv[] = { "AlephOneHD" };
-- (void)postFinishLaunch {
-	// int exit_status = SDL_main(1, (char**)argv);
-	// exit(exit_status);
-}
+
 #pragma mark - Override SDL Delegate
-+ (AlephOneAppDelegate *)sharedAppDelegate {
-	return (AlephOneAppDelegate *)[UIApplication sharedApplication].delegate;
++ (AppDelegate *)sharedAppDelegate {
+	return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 - (GameViewController*)game {
@@ -171,5 +156,19 @@ const char* argv[] = { "AlephOneHD" };
 - (void)oglWidth:(GLint)width oglHeight:(GLint)height {
 	_oglWidth = width;
 	_oglHeight = height;
+}
+
+- (void)setOpenGLView:(SDL_uikitopenglview*)oglView {
+	[self.window.rootViewController.view addSubview:oglView];
+	oglView.frame = self.window.rootViewController.view.bounds;
+}
+
+- (void)setSDLWindowData:(SDL_WindowData*)data {
+	[data.viewcontroller removeFromParentViewController];
+	[data.viewcontroller.view removeFromSuperview];
+	
+	[self.window.rootViewController addChildViewController:data.viewcontroller];
+	[self.window.rootViewController.view addSubview:data.viewcontroller.view];
+	
 }
 @end

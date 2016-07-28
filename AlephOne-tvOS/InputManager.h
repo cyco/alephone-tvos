@@ -14,6 +14,6 @@
 - (void)startWatching;
 - (void)stopWatching;
 
-- (void)mouseDeltaX:(int*)dx deltaY:(int*)dy;
+- (void)mouseDeltaX:(float*)dx deltaY:(float*)dy;
 @property (readonly) GCExtendedGamepad *currentController;
 @end

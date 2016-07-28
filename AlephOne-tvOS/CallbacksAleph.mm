@@ -9,7 +9,7 @@
 
 #import "GameViewController.h"
 #import <AlephOne/AlephOne.h>
-#import "AlephOneAppDelegate.h"
+#import "AppDelegate.h"
 
 #import "PreferenceKeys.h"
 
@@ -91,8 +91,8 @@ void printGLErrorL( const char* message, int line) {
 char* getDataDir() {
 	// NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	// dataDir = [paths objectAtIndex:0];
-	dataDir = [[AlephOneAppDelegate sharedAppDelegate] getDataDirectory];
-	dataDir = [NSString stringWithFormat:@"%@/%@/", dataDir, [AlephOneAppDelegate sharedAppDelegate].scenario.path];
+	dataDir = [[AppDelegate sharedAppDelegate] getDataDirectory];
+	dataDir = [NSString stringWithFormat:@"%@/%@/", dataDir, [AppDelegate sharedAppDelegate].scenario.path];
 	MLog ( @"DataDir: %@", dataDir );
 	return (char*)dataDir.UTF8String;
 
@@ -199,7 +199,7 @@ int helperAutocenter () {
 	}
 };
 
-void helperGetMouseDelta ( int *dx, int *dy ) {
+void helperGetMouseDelta ( float *dx, float *dy ) {
 	// Get the mouse delta from the JoyPad HUD controller, if possible
 	[[InputManager sharedInputManager] mouseDeltaX:dx deltaY:dy];
 }
@@ -246,13 +246,13 @@ extern void helperPickedUp ( short itemType ) {
 }
 
 int helperOpenGLWidth() {
-	return [AlephOneAppDelegate sharedAppDelegate].oglWidth;
+	return [AppDelegate sharedAppDelegate].oglWidth;
 }
 int helperOpenGLHeight() {
-	return [AlephOneAppDelegate sharedAppDelegate].oglHeight;
+	return [AppDelegate sharedAppDelegate].oglHeight;
 }
 int helperRetinaDisplay() {
-	return [AlephOneAppDelegate sharedAppDelegate].retinaDisplay;
+	return [AppDelegate sharedAppDelegate].retinaDisplay;
 }
 int helperRunningOniPad() {
 	return false;

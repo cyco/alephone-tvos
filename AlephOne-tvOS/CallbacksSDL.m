@@ -9,7 +9,7 @@
 #import "Callbacks.h"
 
 #import "GameViewController.h"
-#import "AlephOneAppDelegate.h"
+#import "AppDelegate.h"
 #import "PreferenceKeys.h"
 #import "InputManager.h"
 
@@ -23,4 +23,9 @@ void setOpenGLView (void* view) {
 	// Construct the Game view controller
 	GameViewController *game = [GameViewController sharedInstance];
 	[game setOpenGLView:(__bridge SDL_uikitopenglview *)(view)];
+}
+
+void setSDLWindowData(void* data) {
+	AppDelegate *dele = [UIApplication sharedApplication].delegate;
+	[dele setSDLWindowData:(__bridge SDL_WindowData *)(data)];
 }

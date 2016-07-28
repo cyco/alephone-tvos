@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		83319C2E1D357C6C00723B3B /* AlephOne.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83319C291D357C6C00723B3B /* AlephOne.mm */; };
-		83319C2F1D357C6C00723B3B /* AlephOneAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83319C2B1D357C6C00723B3B /* AlephOneAppDelegate.mm */; };
+		83319C2F1D357C6C00723B3B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83319C2B1D357C6C00723B3B /* AppDelegate.mm */; };
 		83319C471D357C8600723B3B /* CallbacksAleph.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83319C321D357C8600723B3B /* CallbacksAleph.mm */; };
 		83319C481D357C8600723B3B /* CallbacksSDL.m in Sources */ = {isa = PBXBuildFile; fileRef = 83319C331D357C8600723B3B /* CallbacksSDL.m */; };
 		83319C491D357C8600723B3B /* CrosshairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83319C341D357C8600723B3B /* CrosshairView.swift */; };
@@ -35,7 +35,6 @@
 		8375C7ED1D35889F005644A7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8375C7EB1D35889F005644A7 /* MainWindow.xib */; };
 		8391864F1D3D786D00EA8FC0 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8391864E1D3D786C00EA8FC0 /* ImageIO.framework */; };
 		839186511D3D78B700EA8FC0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839186501D3D78B600EA8FC0 /* MobileCoreServices.framework */; };
-		83A40A931D41762D00BAD475 /* AlephOneShell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83319C2C1D357C6C00723B3B /* AlephOneShell.mm */; };
 		83C8C8761D356C9200AA1C1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83C8C8751D356C9200AA1C1D /* Assets.xcassets */; };
 		83D074FB1D43495B003F1B79 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 834F97A51D42CF4B000AFE92 /* libboost_filesystem.a */; };
 		83D096141D434C0E003F1B79 /* m1a1 in Resources */ = {isa = PBXBuildFile; fileRef = 83D096111D434C0B003F1B79 /* m1a1 */; };
@@ -224,10 +223,8 @@
 /* Begin PBXFileReference section */
 		83319C281D357C6C00723B3B /* AlephOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlephOne.h; sourceTree = "<group>"; };
 		83319C291D357C6C00723B3B /* AlephOne.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AlephOne.mm; sourceTree = "<group>"; };
-		83319C2A1D357C6C00723B3B /* AlephOneAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlephOneAppDelegate.h; sourceTree = "<group>"; };
-		83319C2B1D357C6C00723B3B /* AlephOneAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AlephOneAppDelegate.mm; sourceTree = "<group>"; };
-		83319C2C1D357C6C00723B3B /* AlephOneShell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AlephOneShell.mm; sourceTree = "<group>"; };
-		83319C2D1D357C6C00723B3B /* AlephOneShell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlephOneShell.h; sourceTree = "<group>"; };
+		83319C2A1D357C6C00723B3B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		83319C2B1D357C6C00723B3B /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		83319C311D357C8500723B3B /* AlephOne-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AlephOne-Bridging-Header.h"; sourceTree = "<group>"; };
 		83319C321D357C8600723B3B /* CallbacksAleph.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CallbacksAleph.mm; sourceTree = "<group>"; };
 		83319C331D357C8600723B3B /* CallbacksSDL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallbacksSDL.m; sourceTree = "<group>"; };
@@ -275,6 +272,7 @@
 		8375C7EB1D35889F005644A7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		8391864E1D3D786C00EA8FC0 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		839186501D3D78B600EA8FC0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		83A4D6C91D4933EA0021F462 /* SDL_mouse_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SDL_mouse_c.h; path = "Frameworks/SDL2-2.0.4/src/events/SDL_mouse_c.h"; sourceTree = SOURCE_ROOT; };
 		83BB2DE81D42C1AC00B6AAAD /* SDL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDL.xcodeproj; path = "SDL2-2.0.4/Xcode-iOS/SDL/SDL.xcodeproj"; sourceTree = "<group>"; };
 		83C8C8661D356C9200AA1C1D /* AlephOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlephOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C8C8751D356C9200AA1C1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -338,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				834663561D3C25ED0046E13E /* keyinfotable.h */,
+				83A4D6C91D4933EA0021F462 /* SDL_mouse_c.h */,
 				83ED30551D42C4D900C34280 /* SDL_config_tvos.h */,
 				83ED30561D42C4D900C34280 /* SDL_config.h */,
 				834663571D3C25ED0046E13E /* SDL_uikitappdelegate.h */,
@@ -449,10 +448,8 @@
 				83319C311D357C8500723B3B /* AlephOne-Bridging-Header.h */,
 				83319C281D357C6C00723B3B /* AlephOne.h */,
 				83319C291D357C6C00723B3B /* AlephOne.mm */,
-				83319C2A1D357C6C00723B3B /* AlephOneAppDelegate.h */,
-				83319C2B1D357C6C00723B3B /* AlephOneAppDelegate.mm */,
-				83319C2C1D357C6C00723B3B /* AlephOneShell.mm */,
-				83319C2D1D357C6C00723B3B /* AlephOneShell.h */,
+				83319C2A1D357C6C00723B3B /* AppDelegate.h */,
+				83319C2B1D357C6C00723B3B /* AppDelegate.mm */,
 				83319C321D357C8600723B3B /* CallbacksAleph.mm */,
 				83319C331D357C8600723B3B /* CallbacksSDL.m */,
 				83319C351D357C8600723B3B /* dispatch+additions.swift */,
@@ -753,10 +750,9 @@
 				83319C481D357C8600723B3B /* CallbacksSDL.m in Sources */,
 				83319C501D357C8600723B3B /* main.m in Sources */,
 				83319C4E1D357C8600723B3B /* InputManager.mm in Sources */,
-				83319C2F1D357C6C00723B3B /* AlephOneAppDelegate.mm in Sources */,
+				83319C2F1D357C6C00723B3B /* AppDelegate.mm in Sources */,
 				83319C4D1D357C8600723B3B /* ImageLoader_iOS.cpp in Sources */,
 				83319C581D357D0300723B3B /* IntroViewController.swift in Sources */,
-				83A40A931D41762D00BAD475 /* AlephOneShell.mm in Sources */,
 				83319C511D357C8600723B3B /* MainMenuViewController.swift in Sources */,
 				83319C4C1D357C8600723B3B /* GameViewController.mm in Sources */,
 				83319C2E1D357C6C00723B3B /* AlephOne.mm in Sources */,
